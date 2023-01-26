@@ -23,14 +23,24 @@ const LinkedList = () => {
     }
     return list;
   };
-  const prepend = (value, next) => {
+
+  const prepend = (value) => {
     if (Object.keys(list).length === 0) {
       const data = Node(value, null);
       list.value = data.value;
       list.nextNode = data.nextNode;
       return list;
     }
+    if (typeof list.nextNode === 'object') {
+      const temp = { ...list };
+      list.value = value;
+      list.nextNode = temp;
+      console.log(list);
+      return list;
+    }
+    return list;
   };
+
   // Object.keys.length
   const size = () => console.log('diu');
   // Recursion until nextNode.next
@@ -66,14 +76,14 @@ const LinkedList = () => {
 const Node = (value, nextNode) => ({ value, nextNode });
 
 const diu = LinkedList();
-// diu.append(123);
-// diu.append(456);
-// diu.append(789);
+diu.append(123);
+diu.append(456);
 // diu.append(999);
 
-diu.prepend(123);
-// diu.append(456);
-// diu.append(789);
-// diu.append(999);
+diu.prepend('AAA');
+diu.prepend('BBB');
+diu.append(789);
+// diu.prepend('CCC');
+// diu.append('DDD');
 
 console.log(diu.list);
