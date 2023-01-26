@@ -82,8 +82,26 @@ const LinkedList = () => {
       return list.value;
     }
   };
+
   // Recursion until nextNode is null
-  const tail = () => console.log('diu');
+  const tail = (next) => {
+    if (next === undefined) {
+      next = list;
+    }
+
+    if (Object.keys(list).length === 0) {
+      return 'none';
+    }
+
+    if (next.nextNode === null) {
+      return next.value;
+    }
+
+    if (typeof next.nextNode === 'object') {
+      next = next.nextNode;
+      return tail(next);
+    }
+  };
   // Each recursion num++
   const at = () => console.log('diu');
   // Recursion num++, replace num + 1
@@ -113,9 +131,9 @@ const LinkedList = () => {
 const Node = (value, nextNode) => ({ value, nextNode });
 
 const diu = LinkedList();
-diu.append(123);
-diu.append(456);
-diu.append(999);
+// diu.append(123);
+// diu.append(456);
+// diu.append(999);
 
 // diu.prepend('AAA');
 // diu.prepend('BBB');
@@ -125,4 +143,5 @@ diu.append(999);
 
 console.log(diu.list);
 // console.log(diu.size());
-console.log(diu.head());
+// console.log(diu.head());
+// console.log(diu.tail());
