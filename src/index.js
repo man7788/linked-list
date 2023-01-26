@@ -70,7 +70,7 @@ const LinkedList = () => {
 
   const head = () => {
     if (Object.keys(list).length === 0) {
-      return 'none';
+      return null;
     }
 
     if (list.nextNode === null) {
@@ -88,7 +88,7 @@ const LinkedList = () => {
     }
 
     if (Object.keys(list).length === 0) {
-      return 'none';
+      return null;
     }
 
     if (next.nextNode === null) {
@@ -127,7 +127,7 @@ const LinkedList = () => {
     }
 
     if (Object.keys(list).length === 0) {
-      return 'none';
+      return null;
     }
 
     if (next.nextNode === null) {
@@ -161,8 +161,26 @@ const LinkedList = () => {
     }
     return false;
   };
-  // Simple recursion unitl value found
-  const find = () => console.log('diu');
+
+  const find = (value, next, index = 0) => {
+    if (value === undefined) {
+      return 'Please enter a value.';
+    }
+
+    if (next === undefined) {
+      next = list;
+    }
+
+    if (next.value === value) {
+      return index;
+    }
+
+    if (next.nextNode !== null) {
+      next = next.nextNode;
+      return find(value, next, index + 1);
+    }
+    return null;
+  };
   // Simple recursion unitl nextNode null
   // Mutate string with added ${value}
   const toString = () => console.log('diu');
@@ -201,3 +219,4 @@ console.log(diu.list);
 // console.log(diu.at(2));
 // console.log(diu.pop());
 // console.log(diu.contains(456));
+// console.log(diu.find(999));
