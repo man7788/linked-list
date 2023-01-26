@@ -79,7 +79,7 @@ const LinkedList = () => {
     }
 
     if (typeof list.nextNode === 'object') {
-      return list.value;
+      return list;
     }
   };
 
@@ -94,7 +94,7 @@ const LinkedList = () => {
     }
 
     if (next.nextNode === null) {
-      return next.value;
+      return next;
     }
 
     if (typeof next.nextNode === 'object') {
@@ -103,7 +103,29 @@ const LinkedList = () => {
     }
   };
   // Each recursion num++
-  const at = () => console.log('diu');
+  const at = (index, next, count = 0) => {
+    if (index === undefined || typeof index !== 'number') {
+      return 'Please enter an index number.';
+    }
+
+    if (next === undefined) {
+      next = list;
+    }
+
+    if (Object.keys(list).length === 0) {
+      return 'none';
+    }
+
+    if (index === count) {
+      return next;
+    }
+
+    if (next.nextNode !== null) {
+      next = next.nextNode;
+      return at(index, next, count + 1);
+    }
+    return 'Index out of range.';
+  };
   // Recursion num++, replace num + 1
   const pop = () => console.log('diu');
   // Simple recursion unitl nextNode null
@@ -131,17 +153,18 @@ const LinkedList = () => {
 const Node = (value, nextNode) => ({ value, nextNode });
 
 const diu = LinkedList();
-// diu.append(123);
-// diu.append(456);
-// diu.append(999);
+diu.append(123);
+diu.append(456);
+diu.append(999);
 
-// diu.prepend('AAA');
-// diu.prepend('BBB');
-// diu.append(789);
-// diu.prepend('CCC');
+diu.prepend('AAA');
+diu.prepend('BBB');
+diu.append(789);
+diu.prepend('CCC');
 // diu.append('DDD');
 
 console.log(diu.list);
 // console.log(diu.size());
 // console.log(diu.head());
 // console.log(diu.tail());
+// console.log(diu.at(1));
