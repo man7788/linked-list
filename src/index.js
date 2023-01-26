@@ -110,10 +110,6 @@ const LinkedList = () => {
       next = list;
     }
 
-    if (Object.keys(list).length === 0) {
-      return 'none';
-    }
-
     if (index === count) {
       return next;
     }
@@ -145,8 +141,26 @@ const LinkedList = () => {
       return pop(next, last);
     }
   };
-  // Simple recursion unitl nextNode null
-  const contains = () => console.log('diu');
+
+  const contains = (value, next) => {
+    if (value === undefined) {
+      return 'Please enter a value.';
+    }
+
+    if (next === undefined) {
+      next = list;
+    }
+
+    if (next.value === value) {
+      return true;
+    }
+
+    if (next.nextNode !== null) {
+      next = next.nextNode;
+      return contains(value, next);
+    }
+    return false;
+  };
   // Simple recursion unitl value found
   const find = () => console.log('diu');
   // Simple recursion unitl nextNode null
@@ -184,6 +198,6 @@ console.log(diu.list);
 // console.log(diu.size());
 // console.log(diu.head());
 // console.log(diu.tail());
-// console.log(diu.at(1));
+// console.log(diu.at(2));
 // console.log(diu.pop());
-// console.log(diu.pop());
+// console.log(diu.contains(456));
