@@ -3,7 +3,7 @@ import './style.css';
 
 const LinkedList = () => {
   const list = {};
-  // Use recursion to find tail
+
   const append = (value, next) => {
     if (next === undefined) {
       next = list;
@@ -47,7 +47,6 @@ const LinkedList = () => {
     return list;
   };
 
-  // Count how many recurions
   const size = (next, total = 1) => {
     if (next === undefined) {
       next = list;
@@ -83,7 +82,6 @@ const LinkedList = () => {
     }
   };
 
-  // Recursion until nextNode is null
   const tail = (next) => {
     if (next === undefined) {
       next = list;
@@ -126,8 +124,27 @@ const LinkedList = () => {
     }
     return 'Index out of range.';
   };
-  // Recursion num++, replace num + 1
-  const pop = () => console.log('diu');
+
+  const pop = (next, last) => {
+    if (next === undefined) {
+      next = list;
+    }
+
+    if (Object.keys(list).length === 0) {
+      return 'none';
+    }
+
+    if (next.nextNode === null) {
+      last.nextNode = null;
+      return list;
+    }
+
+    if (typeof next.nextNode === 'object') {
+      last = next;
+      next = next.nextNode;
+      return pop(next, last);
+    }
+  };
   // Simple recursion unitl nextNode null
   const contains = () => console.log('diu');
   // Simple recursion unitl value found
@@ -153,14 +170,14 @@ const LinkedList = () => {
 const Node = (value, nextNode) => ({ value, nextNode });
 
 const diu = LinkedList();
-diu.append(123);
-diu.append(456);
-diu.append(999);
+// diu.append(123);
+// diu.append(456);
+// diu.append(999);
 
-diu.prepend('AAA');
-diu.prepend('BBB');
-diu.append(789);
-diu.prepend('CCC');
+// diu.prepend('AAA');
+// diu.prepend('BBB');
+// diu.append(789);
+// diu.prepend('CCC');
 // diu.append('DDD');
 
 console.log(diu.list);
@@ -168,3 +185,5 @@ console.log(diu.list);
 // console.log(diu.head());
 // console.log(diu.tail());
 // console.log(diu.at(1));
+// console.log(diu.pop());
+// console.log(diu.pop());
