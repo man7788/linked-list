@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import './style.css';
 
 const LinkedList = () => {
@@ -65,11 +66,22 @@ const LinkedList = () => {
       return size(next, total + 1);
     }
 
-    console.log('diu');
     return total;
   };
-  // Recursion until nextNode.next
-  const head = () => console.log('diu');
+
+  const head = () => {
+    if (Object.keys(list).length === 0) {
+      return 'none';
+    }
+
+    if (list.nextNode === null) {
+      return list;
+    }
+
+    if (typeof list.nextNode === 'object') {
+      return list.value;
+    }
+  };
   // Recursion until nextNode is null
   const tail = () => console.log('diu');
   // Each recursion num++
@@ -101,9 +113,9 @@ const LinkedList = () => {
 const Node = (value, nextNode) => ({ value, nextNode });
 
 const diu = LinkedList();
-// diu.append(123);
-// diu.append(456);
-// diu.append(999);
+diu.append(123);
+diu.append(456);
+diu.append(999);
 
 // diu.prepend('AAA');
 // diu.prepend('BBB');
@@ -112,4 +124,5 @@ const diu = LinkedList();
 // diu.append('DDD');
 
 console.log(diu.list);
-console.log(diu.size());
+// console.log(diu.size());
+console.log(diu.head());
