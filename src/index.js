@@ -181,9 +181,28 @@ const LinkedList = () => {
     }
     return null;
   };
-  // Simple recursion unitl nextNode null
-  // Mutate string with added ${value}
-  const toString = () => console.log('diu');
+
+  const toString = (next, last, string = '') => {
+    if (next === undefined) {
+      next = list;
+    }
+
+    if (Object.keys(list).length === 0) {
+      return null;
+    }
+
+    if (next.nextNode === null) {
+      string += `(${next.value}) -> null`;
+      return string;
+    }
+
+    if (next.nextNode !== null) {
+      string += `(${next.value}) -> `;
+      next = next.nextNode;
+      return toString(next, last, string);
+    }
+  };
+
   return {
     list,
     append,
@@ -219,4 +238,5 @@ console.log(diu.list);
 // console.log(diu.at(2));
 // console.log(diu.pop());
 // console.log(diu.contains(456));
-// console.log(diu.find(999));
+// console.log(diu.find(123));
+// console.log(diu.toString());
