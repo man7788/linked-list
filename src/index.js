@@ -100,7 +100,7 @@ const LinkedList = () => {
       return tail(next);
     }
   };
-  // Each recursion num++
+
   const at = (index, next, count = 0) => {
     if (index === undefined || typeof index !== 'number') {
       return 'Please enter an index number.';
@@ -203,6 +203,63 @@ const LinkedList = () => {
     }
   };
 
+  const insertAt = (value, index, next, last, count = 1) => {
+    if (value === undefined) {
+      return 'Please enter a value.';
+    }
+
+    if (index === undefined) {
+      return 'Please enter an index.';
+    }
+
+    if (next === undefined) {
+      next = list;
+    }
+
+    if (Object.keys(list).length === 0 && index === 0) {
+      const data = Node(value, null);
+      list.value = data.value;
+      list.nextNode = data.nextNode;
+      return list;
+    }
+
+    if (Object.keys(list).length === 0 && index > 0) {
+      return 'Index out of range.';
+    }
+
+    if (index === 0) {
+      const temp = { ...list };
+      list.value = value;
+      list.nextNode = temp;
+      return list;
+    }
+
+    if (next.nextNode === null) {
+      const fresh = Node(value, null);
+      next.nextNode = fresh;
+      return list;
+    }
+
+    if (index === count) {
+      const temp = next.nextNode;
+      const fresh = Node(value, temp);
+      next.nextNode = fresh;
+      return list;
+    }
+
+    if (next.nextNode !== null) {
+      last = next;
+      next = next.nextNode;
+      return insertAt(value, index, next, last, count + 1);
+    }
+  };
+
+  const removeAt = (index) => {
+    if (index === undefined) {
+      return 'Please enter an index.';
+    }
+  };
+
   return {
     list,
     append,
@@ -215,6 +272,8 @@ const LinkedList = () => {
     contains,
     find,
     toString,
+    insertAt,
+    removeAt,
   };
 };
 
@@ -231,7 +290,7 @@ const diu = LinkedList();
 // diu.prepend('CCC');
 // diu.append('DDD');
 
-console.log(diu.list);
+// console.log(diu.list);
 // console.log(diu.size());
 // console.log(diu.head());
 // console.log(diu.tail());
@@ -240,3 +299,7 @@ console.log(diu.list);
 // console.log(diu.contains(456));
 // console.log(diu.find(123));
 // console.log(diu.toString());
+// console.log(diu.insertAt('lol', 100));
+console.log(diu.list);
+
+// console.log(diu.removeAt());
