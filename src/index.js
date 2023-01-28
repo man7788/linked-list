@@ -254,10 +254,43 @@ const LinkedList = () => {
     }
   };
 
-  const removeAt = (index) => {
+  const removeAt = (index, next, last, count = 0) => {
     if (index === undefined) {
       return 'Please enter an index.';
     }
+
+    if (next === undefined) {
+      next = list;
+    }
+
+    if (next.nextNode === null && count === 0) {
+      delete list.value;
+      delete list.nextNode;
+      return list;
+    }
+
+    if (index === 0) {
+      const temp = { ...next.nextNode };
+      delete list.value;
+      delete list.nextNode;
+      list.value = temp.value;
+      list.nextNode = temp.nextNode;
+      return list;
+    }
+
+    if (index === count) {
+      const temp = next.nextNode;
+      console.log(temp);
+      last.nextNode = temp;
+      return list;
+    }
+
+    if (next.nextNode !== null) {
+      last = next;
+      next = next.nextNode;
+      return removeAt(index, next, last, count + 1);
+    }
+    return 'Index out of range.';
   };
 
   return {
@@ -280,15 +313,15 @@ const LinkedList = () => {
 const Node = (value, nextNode) => ({ value, nextNode });
 
 const diu = LinkedList();
-// diu.append(123);
-// diu.append(456);
-// diu.append(999);
+diu.append(123);
+diu.append(456);
+diu.append(999);
 
-// diu.prepend('AAA');
-// diu.prepend('BBB');
-// diu.append(789);
-// diu.prepend('CCC');
-// diu.append('DDD');
+diu.prepend('AAA');
+diu.prepend('BBB');
+diu.append(789);
+diu.prepend('CCC');
+diu.append('DDD');
 
 // console.log(diu.list);
 // console.log(diu.size());
@@ -296,10 +329,10 @@ const diu = LinkedList();
 // console.log(diu.tail());
 // console.log(diu.at(2));
 // console.log(diu.pop());
-// console.log(diu.contains(456));
+// console.log(diu.contains(123));
 // console.log(diu.find(123));
-// console.log(diu.toString());
-// console.log(diu.insertAt('lol', 100));
-console.log(diu.list);
+// console.log(diu.insertAt('lol', 1));
+// console.log(diu.removeAt(2));
 
-// console.log(diu.removeAt());
+console.log(diu.list);
+// console.log(diu.toString());
